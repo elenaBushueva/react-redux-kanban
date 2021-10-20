@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/redux-kanban-oct.iml" filepath="$PROJECT_DIR$/.idea/redux-kanban-oct.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/react-redux-kanban.iml" filepath="$PROJECT_DIR$/.idea/react-redux-kanban.iml" />
     </modules>
   </component>
 </project>

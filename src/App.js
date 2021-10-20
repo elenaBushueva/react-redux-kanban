@@ -1,25 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import {connect} from "react-redux";
+import Columns from "./Columns";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import CreateTask from "./CreateTask";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App = (props) => {
+    console.log(props)
 
-export default App;
+    return (
+            <div className="container">
+                <h1>Kanban Redux</h1>
+                <CreateTask />
+                <div className="row align-items-start">
+                    {props.statuses.map(el => <Columns
+                        key={el.id}
+                        status={el}
+                    />)}
+                </div>
+            </div>
+    );
+};
+
+const mapStateToProps = state => ({
+    statuses: state.statuses,
+});
+
+const mapDispatchToProps = dispaptch => ({})
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
