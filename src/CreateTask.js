@@ -6,16 +6,19 @@ import {connect} from "react-redux";
 const CreateTask = (props) => {
 
     const [modal, setModal] = useState(false);
-    const toggle = () => setModal(!modal);
 
     const [inputName, setInputName] = useState('');
     const [inputDescription, setInputDescription] = useState('');
 
+    const toggle = () => {
+        setInputName('');
+        setInputDescription('');
+        setModal(!modal);
+    }
+
     const onCreate = () => {
         props.createCard(inputName, inputDescription);
         toggle();
-        setInputName('');
-        setInputDescription('');
     }
 
 

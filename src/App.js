@@ -10,7 +10,9 @@ const App = (props) => {
     return (
             <div className="container">
                 <h1>Kanban Redux</h1>
+
                 <CreateTask />
+
                 <div className="row align-items-start">
                     {props.statuses.map(el => <Columns
                         key={el.id}

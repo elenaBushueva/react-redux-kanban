@@ -1,6 +1,10 @@
 import React from 'react';
+import EditTask from "./EditTask";
+import DeleteTask from "./DeleteTask";
+import {connect} from "react-redux";
 
 const Cards = (props) => {
+
     return (
         <div>
             <div className="card">
@@ -8,14 +12,32 @@ const Cards = (props) => {
                     <h5 className="card-title">{props.task.name}</h5>
                     <h6 className="card-subtitle mb-2 text-muted">{props.task.description}</h6>
                     <p className="card-text">{props.task.status}</p>
-                    <a href="#" className="card-link">Card link</a>
-                    <a href="#" className="card-link">Another link</a>
+                    <button type="button" className="btn-outline-secondary btn-sm"
+                            disabled={props.statuses.indexOf(props.task.status) === 0}
+                            onClick={ () => props.moveCard(props.task.id, props.task.status, -1) }> ❮</button>
+                    <button type="button" className="btn-outline-secondary btn-sm"> ˄</button>
+                    <button type="button" className="btn-outline-secondary btn-sm"> ˅</button>
+                    <button type="button" className="btn-outline-secondary btn-sm"
+                            disabled={props.statuses.indexOf(props.task.status) === props.statuses.length - 1}
+                            onClick={ () => props.moveCard(props.task.id, props.task.status, +1) }> ❯</button>
+                    <br/><br/>
+
+                    <EditTask task={props.task}/>
+
+                    <DeleteTask task={props.task}/>
+
                 </div>
             </div>
         </div>
     );
 };
 
+const mapStateToProps = state => ({
+    statuses: state.statuses.map(el => el.title)
+})
 
+const mapDispatchToProps = dispatch => ({
+    moveCard: (id, currStatus, direction) => dispatch({type: 'CHANGE_STATUS', payload: {id, currStatus, direction}})
+})
 
-export default Cards;
+export default connect(mapStateToProps, mapDispatchToProps)(Cards);

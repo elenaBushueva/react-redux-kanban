@@ -26,15 +26,32 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
 
-switch(action.type) {
+    switch (action.type) {
 
-    case 'CREATE_CARD':
-        const newTask = [...state.tasks, action.payload]
-        return {...state, tasks: newTask}
+        case 'CREATE_CARD':
+            const newTasks1 = [...state.tasks, action.payload]
+            return {...state, tasks: newTasks1};
+
+        case 'CHANGE_STATUS':
+            const statusArray = state.statuses.map(el => el.title);
+            const newStatus = statusArray[statusArray.indexOf(action.payload.currStatus) + action.payload.direction];
+            const newTasks2 = state.tasks.map(el => el.id === action.payload.id ? {...el, status: newStatus} : el);
+            return {...state, tasks: newTasks2};
+
+        case 'EDIT_CARD':
+            console.log(action.payload)
+            const newTasks3 = state.tasks.map(el => el.id === action.payload.id ? action.payload : el);
+            return {...state, tasks: newTasks3};
+
+        case 'DELETE_TASK':
+            console.log('PAYLOAD:', action.payload)
+            const newTasks4 = state.tasks.filter(el => el.id !== action.payload);
+            return {...state, tasks: newTasks4};
 
 
-    default: return state;
-}
+        default:
+            return state;
+    }
 }
 
 export default reducer;
