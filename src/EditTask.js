@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {Button, Modal, ModalBody, ModalFooter, ModalHeader} from "reactstrap";
 import {connect} from "react-redux";
+import ButtonEdit from "./ButtonEdit";
 
 
 const EditTask = (props) => {
@@ -11,8 +12,8 @@ const EditTask = (props) => {
     const [inputDescription, setInputDescription] = useState(props.task.description);
 
     const toggle = () => {
-        setInputName(props.task.name)
-        setInputDescription(props.task.description)
+        // setInputName(props.task.name)
+        // setInputDescription(props.task.description)
         setModal(!modal);
     }
 
@@ -28,7 +29,9 @@ const EditTask = (props) => {
             <button type="button" className="btn btn-outline-secondary btn-sm" onClick={toggle} >Edit</button>
 
             <Modal isOpen={modal} toggle={toggle}>
+
                 <ModalHeader toggle={toggle}>Edit Task</ModalHeader>
+
                 <ModalBody>
 
                     <div className="input-group mb-3">
@@ -42,13 +45,13 @@ const EditTask = (props) => {
                                aria-describedby="basic-addon1" value={inputDescription} onChange={(e) => setInputDescription(e.target.value)}
                                />
                     </div>
-
-
                 </ModalBody>
+
                 <ModalFooter>
-                    <Button color="primary"  onClick={onEdit}> Edit </Button>{' '}
+                  <ButtonEdit onEdit={onEdit}/>
                     <Button color="secondary" onClick={toggle}>Cancel</Button>
                 </ModalFooter>
+
             </Modal>
         </div>
     );

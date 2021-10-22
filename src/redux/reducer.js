@@ -15,12 +15,13 @@ const initialState = {
         }
     ],
     tasks: [
-        {name: 'task 1', id: 111, description: 'do kanban', status: 'todo'},
-        {name: 'task 2', id: 112, description: 'do list', status: 'progress'},
-        {name: 'task 3', id: 113, description: 'do homework', status: 'progress'},
-        {name: 'task 4', id: 114, description: 'do articles', status: 'review'},
-        {name: 'task 5', id: 115, description: 'do list of profitable goods', status: 'done'},
-    ]
+        {name: 'task 1', id: 111, description: 'do kanban', status: 'todo', priority: 1},
+        {name: 'task 2', id: 112, description: 'do list', status: 'progress', priority: 2},
+        {name: 'task 3', id: 113, description: 'do homework', status: 'progress', priority: 3},
+        {name: 'task 4', id: 114, description: 'do articles', status: 'review', priority: 4},
+        {name: 'task 5', id: 115, description: 'do list of profitable goods', status: 'done', priority: 5},
+    ],
+    priority: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
 };
 
 
@@ -48,6 +49,10 @@ const reducer = (state = initialState, action) => {
             const newTasks4 = state.tasks.filter(el => el.id !== action.payload);
             return {...state, tasks: newTasks4};
 
+        case 'CHANGE_PRIORITY':
+            const newPriority = state.priority[state.priority.indexOf(action.payload.priority) + action.payload.direction];
+            const newTasks5 = state.tasks.map(el => el.id === action.payload.id ? {...el, priority: newPriority} : el);
+            return {...state, tasks: newTasks5};
 
         default:
             return state;

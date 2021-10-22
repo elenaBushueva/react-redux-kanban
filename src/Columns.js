@@ -9,6 +9,7 @@ const Columns = (props) => {
 
                 {props.tasks
                     .filter(el => el.status === props.status.title)
+                    .sort((a, b) => a.priority - b.priority)
                     .map(el => <Cards
                 key={el.id}
                 task={el}
